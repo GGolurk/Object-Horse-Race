@@ -1,5 +1,7 @@
-#include <iostream>
+#include "race.h"
+#include "horse.h"
 
 int main(){
-	std::cout << "Hello Horse" << std::endl;
+	//What goes here???
+	Race::runGame();
 }
