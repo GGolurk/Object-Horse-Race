@@ -8,26 +8,25 @@ Horse::Horse(){
 	Horse::id = 0;
 } // End constructor
 
-void Horse::init(int id, int trackLength, int position){
-	Horse::position = position;
+void Horse::init(int id, int trackLength){
 	Horse::trackLength = trackLength;
 	Horse::id = id;
 } // End init
 
 void Horse::advance(){
-	// I probably don't need to seed this multiple times, but I'm not sure where else to put this.
-	srand(time(NULL));
+	//I was getting all the same random numbers, so I added id to make them different.
+	srand(time(NULL) + Horse::id);
 	int random = rand();
 	int movement = random % 2;
-	Horse::position += movement;
+	Horse::position = Horse::position + movement;
 } // End advance
 
 void Horse::printLane(){
-	for(int i = 0; i <  trackLength; i++){
-		if(i != position){
+	for(int i = 0; i < Horse::trackLength; i++){
+		if(i != Horse::position){
 			std::cout << ".";
 		} else {
-			std::cout << position;
+			std::cout << Horse::id;
 		} // End if/else
 	} // End for
 	// Breaks the lines up.
@@ -35,7 +34,9 @@ void Horse::printLane(){
 } // End printLane
 
 bool Horse::isWinner(){
-	if(position > trackLength){
+	if(Horse::position >= Horse::trackLength){
+		return false;
+	} else {
 		return true;
-	} // End if
+	} // End if/else
 } // End isWinner
